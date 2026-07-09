@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MBTI 16型人格测试</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ==================== 首页 ==================== -->
+  <div id="page-welcome" class="page active">
+    <div class="page-content">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" stroke="#007AFF" stroke-width="4" fill="none" opacity="0.15"/>
+          <circle cx="60" cy="45" r="12" stroke="#007AFF" stroke-width="3.5" fill="none"/>
+          <path d="M30 88c0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30"
+                stroke="#007AFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <circle cx="44" cy="42" r="2.5" fill="#007AFF"/>
+          <circle cx="76" cy="42" r="2.5" fill="#007AFF"/>
+          <path d="M44 48c0 0 5 3 16 3s16-3 16-3" stroke="#007AFF" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1 class="welcome-title">MBTI 性格测试</h1>
+      <p class="welcome-desc">
+        基于荣格心理学理论，通过93道精心设计的题目，帮助你深入了解自己的性格类型。
+        测试涵盖四个核心维度，全面评估你的个性倾向。
+      </p>
+      <div class="welcome-features">
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <span class="feature-text">93道专业测评题目</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <span class="feature-text">16种人格类型全面解读</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <span class="feature-text">约10-15分钟完成</span>
+        </div>
+      </div>
+      <button id="btn-start" class="btn-primary">开始测试</button>
+      <p class="welcome-hint">无需注册，全程免费</p>
+    </div>
+  </div>
+
+  <!-- ==================== 答题页 ==================== -->
+  <div id="page-quiz" class="page">
+    <!-- 导航栏 -->
+    <div class="quiz-nav">
+      <button id="btn-back" class="btn-nav">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="quiz-progress-wrap">
+        <span class="quiz-progress-label" id="progress-text">第 1/93 题</span>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progress-fill" style="width: 1.08%;"></div>
+        </div>
+      </div>
+      <div class="btn-nav-placeholder"></div>
+    </div>
+
+    <!-- 题目卡片 -->
+    <div class="quiz-content" id="quiz-content">
+      <div class="quiz-card">
+        <div class="quiz-card-header">
+          <span class="quiz-card-num" id="question-num">第 1/93 题</span>
+          <span class="quiz-card-dim" id="question-dim">E/I 维度</span>
+        </div>
+        <div class="quiz-card-body">
+          <p class="quiz-card-text" id="question-text">题目加载中...</p>
+        </div>
+      </div>
+
+      <!-- 选项按钮 -->
+      <div class="quiz-options">
+        <button class="btn-option" id="btn-option-A" data-option="A">
+          <span class="option-letter">A</span>
+          <span class="option-text" id="option-text-A">--</span>
+        </button>
+        <button class="btn-option" id="btn-option-B" data-option="B">
+          <span class="option-letter">B</span>
+          <span class="option-text" id="option-text-B">--</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 底部导航按钮 -->
+    <div class="quiz-footer">
+      <button id="btn-prev" class="btn-secondary" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        上一题
+      </button>
+      <button id="btn-next" class="btn-secondary">
+        下一题
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="btn-submit" class="btn-primary" style="display:none;">查看结果</button>
+    </div>
+  </div>
+
+  <!-- ==================== 结果页 ==================== -->
+  <div id="page-result" class="page">
+    <div class="result-content" id="result-content">
+      <!-- 动态渲染 -->
+    </div>
+  </div>
+
+  <!-- ==================== 加载过渡层 ==================== -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner">
+      <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="16" stroke="#E5E5EA" stroke-width="3" fill="none"/>
+        <circle cx="20" cy="20" r="16" stroke="#007AFF" stroke-width="3" fill="none"
+                stroke-dasharray="75" stroke-dashoffset="25" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20"
+                            dur="1s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <p class="loading-text">分析中...</p>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="results.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
